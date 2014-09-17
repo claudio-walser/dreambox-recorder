@@ -9,7 +9,7 @@ ini_set('display_errors', true);
  * get the autoloader
  */
 require_once('../Autoloader.php');
-$autoloader = new DreamboxRecorder\Autoloader(true);
+$autoloader = new DreamboxRecorder\Autoloader();
 
 /**
  * registry objects to work with

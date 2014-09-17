@@ -2,7 +2,7 @@
 
 namespace DreamboxRecorder\Core;
 
-class ApiClient extends \Spaf\Core\Registry {
+class ApiClient {
 	
 	private $curl = null;
 

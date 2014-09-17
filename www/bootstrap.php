@@ -18,4 +18,9 @@ $registry = Spaf\Core\Registry::getInstance();
 $registry->set('mysqli', new MySQLi('localhost', 'root', '', 'dreambox-recorder'), true);
 
 
+$configFile = '../config/config.ini';
+
+$config = \Spaf\Library\Config\Manager::factory($configFile);
+$registry->set('config', $config, true);
+
 ?>

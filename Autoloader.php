@@ -5,7 +5,7 @@
  * Autoloader.php test
  */
 
-namespace Hackday;
+namespace DreamboxRecorder;
 
 // load Spaf\Autoloader, YOU HAVE TO
 require_once('../../Spaf/src/Spaf/Core/Autoloader.php');
@@ -18,6 +18,14 @@ require_once('../../Spaf/src/Spaf/Core/Autoloader.php');
  * @author		Claudio Walser
  */
 final class Autoloader extends \Spaf\Core\Autoloader {
+
+	/**
+	 * Todo: Make this simpler, for example, just define lookup paths
+	 */
+	protected $_lookupPaths = array(
+		'../../Spaf/src/',
+		'../../'
+	);
 
 	/**
 	 * Autoloader for the Cwa Framework classes
@@ -47,7 +55,7 @@ final class Autoloader extends \Spaf\Core\Autoloader {
 	 * @param		String		Classname with complete namespace
 	 * @return		boolean
 	 */
-	public function Hackday($name) {
+	public function DreamboxRecorder($name) {
 		$file = $this->_getFilename($name);
 		$file = '../../' . $file;
 		

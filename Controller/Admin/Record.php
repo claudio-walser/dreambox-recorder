@@ -1,11 +1,6 @@
 <?php
-namespace Hackday\Controller\Admin;
+namespace DreamboxRecorder\Controller\Admin;
 
-/**
- * This class returns always a array with the following elements:
- * success		=>		bool success, true || false
- * data			=>		mixed data, could be every datatype and contains your needed data
- */
 class Record extends \Spaf\Core\Controller\Abstraction {
 
 	private $_db = null;
@@ -18,6 +13,7 @@ class Record extends \Spaf\Core\Controller\Abstraction {
 		$id = $this->_request->getParam('id');
 		$query = "SELECT * FROM recording WHERE id=" . $this->_db->real_escape_string($id);
 		$result = $this->_db->query($query);
+		
 		return $this->_response->write($result->num_rows);
 	}
 
@@ -38,12 +34,9 @@ class Record extends \Spaf\Core\Controller\Abstraction {
 			}
 		}
 		
-		return $this->_response->write('dont work yet' . print_r($ids, true));
+		return $this->_response->write(true);
 	}
 	
-	/**
-	 * @todo	this class/method has to be high extendable
-	 */
 	public function removeFromRecording() {
 		$ids = $this->_request->getParam('dontRecord');
 		return $this->_response->write('not implemented yet');

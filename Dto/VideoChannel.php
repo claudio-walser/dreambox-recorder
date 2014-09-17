@@ -1,15 +1,10 @@
 <?php
-namespace Hackday\Dto;
+namespace DreamboxRecorder\Dto;
 
-/**
- * This class returns always a array with the following elements:
- * success		=>		bool success, true || false
- * data			=>		mixed data, could be every datatype and contains your needed data
- */
 class VideoChannel {
 	
 	private $_id = 0;
-	private $_name = 'default name';
+	private $_name = 'unknown';
 
 	public function setId($id) {
 		$this->_id = (int) $id;
@@ -20,7 +15,7 @@ class VideoChannel {
 	}
 
 	public function setName($name) {
-		$this->_name = utf8_decode((string) $name);
+		$this->_name = (string) $name;
 	}
 
 	public function getName() {

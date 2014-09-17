@@ -1,6 +1,6 @@
 <?php
 
-namespace Hackday\Core;
+namespace DreamboxRecorder\Core;
 
 class ApiClient extends \Spaf\Core\Registry {
 	
@@ -16,7 +16,7 @@ class ApiClient extends \Spaf\Core\Registry {
 		curl_setopt($this->curl, CURLOPT_HEADER, 0);
 		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, $timeout);
-		// grab URL and pass it to the browser
+		// grab URL and fetch content
 		$data = curl_exec($this->curl);
 		
 		// close cURL resource, and free up system resources

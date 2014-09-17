@@ -1,6 +1,6 @@
-CREATE DATABASE `hackday`;
+CREATE DATABASE `dreambox-recorder`;
 
-CREATE TABLE `hackday`.`recording` (
+CREATE TABLE `dreambox-recorder`.`recording` (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	token VARCHAR(255),
 	state VARCHAR(255),

@@ -1,11 +1,6 @@
 <?php
-namespace Hackday\Dto;
+namespace DreamboxRecorder\Dto;
 
-/**
- * This class returns always a array with the following elements:
- * success		=>		bool success, true || false
- * data			=>		mixed data, could be every datatype and contains your needed data
- */
 class Broadcast {
 	
 	private $_id = 0;
@@ -24,7 +19,7 @@ class Broadcast {
 	}
 
 	public function setName($name) {
-		$this->_name = utf8_decode((string) $name);
+		$this->_name = (string) $name;
 	}
 
 	public function getName() {
@@ -32,7 +27,7 @@ class Broadcast {
 	}
 
 	public function setTitle($title) {
-		$this->_title = utf8_decode((string) $title);
+		$this->_title = (string) $title;
 	}
 
 	public function getTitle() {
@@ -40,7 +35,7 @@ class Broadcast {
 	}
 
 	public function setSubTitle($subtitle) {
-		$this->_subtitle = utf8_decode((string) $subtitle);
+		$this->_subtitle = (string) $subtitle;
 		}
 
 	public function getSubTitle() {
@@ -51,7 +46,7 @@ class Broadcast {
 		if (substr($link, 0, 7) !== 'http://') {
 			$link = 'http://' . $link;
 		}
-		$this->_link = utf8_decode((string) $link);
+		$this->_link = (string) $link;
 	}
 
 	public function getLink() {

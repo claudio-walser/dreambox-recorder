@@ -1,8 +1,4 @@
 <?php
-
-use Hackday\Autoloader,
-	Hackday\Connector;
-
 /**
  * setup the error reporting
  */
@@ -14,8 +10,14 @@ ini_set('display_errors', true);
  * get the autoloader
  */
 require_once('../Autoloader.php');
-$autoloader = new Autoloader();
-$connector = new Connector();
-$connector->setMySQLi(new MySQLi('localhost', 'root', '', 'hackday'));
+$autoloader = new DreamboxRecorder\Autoloader();
+
+
+/**
+ * registry objects to work with
+ */
+$registry = Spaf\Core\Registry::getInstance();
+$registry->set('mysqli', new MySQLi('localhost', 'root', '', 'dreambox-recorder'), true);
+
 
 ?>

@@ -1,5 +1,10 @@
 <?php
-include('bootstrap.php');
+include('./bootstrap.php');
+
+$application = new \DreamboxRecorder\Application('php');
+$request = new \Spaf\Core\Request\Http();
+
+print_r($application->run());
 ?>
 
 <html>

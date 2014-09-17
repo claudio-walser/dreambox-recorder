@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<database>
+
+
+	<!-- db access data -->
+	<dataSourceName>
+		<sqlDriver>mysqli</sqlDriver>
+		<host>localhost</host>
+		<user>root</user>
+		<password></password>
+		<name>dreambox-recorder</name>
+	</dataSourceName>
+
+
+	<table name="recording" description="recording table">
+		<column name="id" 				type="int" 		size="11" 		null="false"	primaryKey="true" 					description="primary key"	autoincrement="true"			/>
+		<column name="token" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
+		<column name="state" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
+		<column name="file" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
+		<column name="title" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
+		<column name="channel" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
+	</table>
+
+</database>

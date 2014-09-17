@@ -5,13 +5,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', true);
 
-
 /**
  * get the autoloader
  */
 require_once('../Autoloader.php');
-$autoloader = new DreamboxRecorder\Autoloader();
-
+$autoloader = new DreamboxRecorder\Autoloader(true);
 
 /**
  * registry objects to work with

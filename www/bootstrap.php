@@ -6,6 +6,20 @@ error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 /**
+ * Procedural function for building http query
+ */
+function getCurrentLink(Array $params = array()) {
+	$current = $_GET;
+	// overwrite get with given params
+	foreach ($params as $key => $value) {
+		$current[$key] = $value;
+	}
+	
+	return '?' . http_build_query($current);
+}
+
+
+/**
  * get the autoloader
  */
 require_once('../Autoloader.php');

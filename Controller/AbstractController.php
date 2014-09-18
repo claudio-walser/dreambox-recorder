@@ -13,5 +13,9 @@ abstract class AbstractController extends \Spaf\Core\Controller\Abstraction {
 		$this->_config = $this->_registry->get('config');
 	}
 
+	protected function _xmlToObject($xmlString) {
+		$xml = simplexml_load_string($xmlString);
+		return json_decode(json_encode($xml));
+	}
 }
 ?>

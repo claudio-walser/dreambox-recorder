@@ -4,7 +4,7 @@ include('./bootstrap.php');
 $application = new \DreamboxRecorder\Application('php');
 $request = new \Spaf\Core\Request\Http();
 
-print_r($application->run());
+print_r($application->run('\\DreamboxRecorder\\Controller\\Dreambox', 'view'));
 ?>
 
 <html>

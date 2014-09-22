@@ -8,9 +8,7 @@ final class Application  extends \Spaf\Core\Application{
 	protected $_application = null;
 	protected $_type = 'php';
 	protected $_types = array('php', 'json', 'xml');
-	protected $_registry = null;
-	protected $_response = null;
-	protected $_request = null;
+
 
 	public function __construct($type = 'php') {
 		parent::__construct();

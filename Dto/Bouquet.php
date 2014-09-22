@@ -2,10 +2,10 @@
 
 namespace DreamboxRecorder\Dto;
 
-class Bouquet {
+class Bouquet extends AbstractDto {
 	
-	private $_name = '';
-	private $_reference = '';
+	protected $_name = '';
+	protected $_reference = '';
 
 
 

@@ -5,12 +5,12 @@ namespace DreamboxRecorder;
 
 final class Application  extends \Spaf\Core\Application{
 
-	private $_application = null;
-	private $_type = 'php';
-	private $_types = array('php', 'json', 'xml');
-	private $_registry = null;
-	private $_response = null;
-	private $_request = null;
+	protected $_application = null;
+	protected $_type = 'php';
+	protected $_types = array('php', 'json', 'xml');
+	protected $_registry = null;
+	protected $_response = null;
+	protected $_request = null;
 
 	public function __construct($type = 'php') {
 		parent::__construct();
@@ -20,20 +20,19 @@ final class Application  extends \Spaf\Core\Application{
 		
 		switch ($this->_type) {
 			case 'php':
-				$this->_response = new \Spaf\Core\Response\Php();
-				$this->_request = new \Spaf\Core\Request\Php();
+				$response = new \Spaf\Core\Response\Php();
+				$request = new \Spaf\Core\Request\Php();
 				break;
 			
 			default:
-				$this->_response = new \Spaf\Core\Response\Json();
-				$this->_request = new \Spaf\Core\Request\Http();
+				$response = new \Spaf\Core\Response\Json();
+				$request = new \Spaf\Core\Request\Http();
 				break;
 		}
 
-		$this->_registry = \Spaf\Core\Registry::getInstance();
-		$this->_registry->set('request', $this->_request, true);
-		$this->_registry->set('response', $this->_response, true);
-
+		$this->setRegistry(\Spaf\Core\Registry::getInstance());
+		$this->setRequest($request);
+		$this->setResponse($response);
 	}
 
 	public function run($controller = '\\DreamboxRecorder\\Controller\\NotFound', $action = 'view', $params = array()) {

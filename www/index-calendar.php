@@ -18,19 +18,25 @@ $twitterBootstrap = '/resources/bootstrap-3.2.0/';
     <!-- Bootstrap -->
     <link href="<?php echo $twitterBootstrap; ?>css/bootstrap.min.css" rel="stylesheet">
     
+    <!--
+    <script type="text/javascript" src="/resources/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/resources/jquery/jquery.ui.touch-punch.min.js"></script>
+    <link rel="stylesheet" id="jquery-ui-style-css" href="/resources/jquery/css/jquery-ui-1.10.3.custom.min.css" type="text/css" media="all">
+
+    <script type="text/javascript" src="/resources/jquery/plugins/jquery.moment-langs.min.js"></script>
+    <script type="text/javascript" src="/resources/jquery/plugins/jquery.rangecalendar.js"></script>
+    <link rel="stylesheet" id="rangecalendar-style-css" href="/resources/jquery/plugins/css/rangecalendar.css" type="text/css" media="all">
+    <script>
+    jQuery(document).ready(function(){
+      console.log(jQuery('#range-calendar').rangeCalendar());
+      //var simpleRangeCalendar = $("#range-calendar").rangeCalendar();
+    });
+    </script>
+    -->
     <style>
     	.top-spacer {
     		height: 60px;
     	}
-
-      div.disabled {
-        opacity: .5;
-
-      }
-      div.disabled input {
-        display: none;
-      }
-
     </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,7 +68,7 @@ $twitterBootstrap = '/resources/bootstrap-3.2.0/';
 
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/resources/jquery/jquery.min.js"></script>
     <script src="<?php echo $twitterBootstrap; ?>js/bootstrap.min.js"></script>
     <script src="/resources/js/my.js"></script>
   </body>

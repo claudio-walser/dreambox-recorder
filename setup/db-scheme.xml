@@ -16,6 +16,8 @@
 	<table name="recording" description="recording table">
 		<column name="id" 				type="int" 		size="11" 		null="false"	primaryKey="true" 					description="primary key"	autoincrement="true"			/>
 		<column name="token" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
+		<column name="timeStart"		type="int" 		size="11" 		null="false"	default=""							description="group name"									/>
+		<column name="timeEnd" 			type="int"	 	size="11" 		null="false"	default=""							description="group name"									/>
 		<column name="state" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
 		<column name="file" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>
 		<column name="title" 			type="varchar" 	size="255" 		null="false"	default=""							description="group name"									/>

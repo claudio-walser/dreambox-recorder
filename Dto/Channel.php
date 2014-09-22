@@ -7,10 +7,10 @@
  */
 namespace DreamboxRecorder\Dto;
 
-class Channel {
+class Channel extends AbstractDto {
 	
-	private $_name = '';
-	private $_reference = '';
+	protected $_name = '';
+	protected $_reference = '';
 
 
 

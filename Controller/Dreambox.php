@@ -19,8 +19,6 @@ class Dreambox extends AbstractController {
 	}
 
 	public function getBouquets() {
-		$bouquets = $this->_request->getParam('bouquets', 'all');
-
 		$url = $this->_address . '/web/getservices';
 		$response = $this->_xmlToObject($this->_apiClient->processUrl($url));
 		
@@ -38,32 +36,68 @@ class Dreambox extends AbstractController {
 		return $this->_response->write($bouquets);
 	}
 
+	/**
+	 * Optimize this, instead of getting all and loop till you got the right one
+	 * see in the docu if there is a api to fetch channels by bouquet.
+	 * And implement all channels as well
+	 */
 	public function getChannels() {
 		$bouquetReference = $this->_request->getParam('bouquet', 'all');
 		
-		$url = $this->_address . '/web/getallservices';
+		#$url = $this->_address . '/web/getallservices';
+		$url = $this->_address . '/web/getservices?sRef=' . urlencode($bouquetReference);
 		$response = $this->_xmlToObject($this->_apiClient->processUrl($url));
 
 		if (!empty($response)) {
-			foreach ($response->e2bouquet as $bouquet) {
-				if ($bouquetReference === $bouquet->e2servicereference) {
-					$channels = array();
-							
-					foreach ($bouquet->e2servicelist->e2service as $service) {
-						$dto = new \DreamboxRecorder\Dto\Channel();
-						$dto->setName($service->e2servicename);
-						$dto->setReference($service->e2servicereference);
-						array_push($channels, $dto);
-					}
-					return $this->_response->write($channels);
-				}
-
+			$channels = array();
+			foreach ($response->e2service as $service) {
+				$dto = new \DreamboxRecorder\Dto\Channel();
+				$dto->setName($service->e2servicename);
+				$dto->setReference($service->e2servicereference);
+				array_push($channels, $dto);
 			}
+			return $this->_response->write($channels);
+
 		}		
 
 		return $this->_response->write(array());
 	}
 
+	public function getBroadcasts() {
+		$serviceReference = $this->_request->getParam('service');
+		if ($serviceReference === null) {
+			return $this->_response->write(false);
+		}
+		
+		$url = $this->_address . '/web/epgservice?sRef=' . urlencode($serviceReference);
+		$response = $this->_xmlToObject($this->_apiClient->processUrl($url));
+
+		$broadcasts = array();
+		if (!empty($response)) {
+			foreach ($response->e2event as $broadcast) {
+				// fetch from controller recording
+				$isRecording = $this->controller(
+					'\\DreamboxRecorder\\Controller\\Recording',
+					'has',
+					array(
+						'id' => $broadcast->e2eventid
+					)
+				);
+								
+				$dto = new \DreamboxRecorder\Dto\Broadcast();
+				$dto->setId($broadcast->e2eventid);
+				$dto->setIsRecording($isRecording['data']);
+				$dto->setTitle($broadcast->e2eventtitle);
+				$dto->setTimeStart($broadcast->e2eventstart);
+				$dto->setTimeEnd($broadcast->e2eventstart + $broadcast->e2eventduration);
+				$dto->setIsOver($dto->getTimeEnd() <= time());
+				
+				array_push($broadcasts, $dto);
+			}
+		}
+
+		return $this->_response->write($broadcasts);
+	}
 
 }
 ?>

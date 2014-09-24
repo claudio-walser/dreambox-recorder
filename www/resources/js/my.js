@@ -26,7 +26,9 @@
 					ids: [e.currentTarget.value],
 					serviceReferences: [$(e.currentTarget).data('service-reference')],
 					endTimes: [$(e.currentTarget).data('end-time')],
-					startTimes: [$(e.currentTarget).data('start-time')]
+					startTimes: [$(e.currentTarget).data('start-time')],
+					title: [$(e.currentTarget).data('title')],
+					channel: [$(e.currentTarget).data('channel')]
 				},
 				success: function(response) {
 					if (response.success === false) {
@@ -72,7 +74,7 @@
 					html += dateEndObject.toLocaleTimeString();
 					html += '<br />';
 					html += '<strong class="title">' + object.title + '</strong>';
-					html += '<br /><input ' + checked + ' type="checkbox" class="checkbox-broadcast" name="broadcast" value="' + object.id + '" data-service-reference="' + $this.data('service-reference') + '" data-end-time="' + object.timeEnd + '" data-start-time="' + object.timeStart + '" /> aufnehmen';
+					html += '<br /><input ' + checked + ' type="checkbox" class="checkbox-broadcast" name="broadcast" value="' + object.id + '" data-service-reference="' + $this.data('service-reference') + '" data-end-time="' + object.timeEnd + '" data-start-time="' + object.timeStart + '" data-channel="' + object.channel + '" data-title="' + object.title + '" /> aufnehmen';
 					
 					html += '</div>';
 					html += '<hr />';

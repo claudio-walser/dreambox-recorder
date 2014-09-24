@@ -22,7 +22,12 @@ class Dreambox extends AbstractController {
 		$url = $this->_address . '/web/getservices';
 		$response = $this->_xmlToObject($this->_apiClient->processUrl($url));
 		
-		$bouquets = array();
+		$dtoAll = new \DreamboxRecorder\Dto\Bouquet();
+		$dtoAll->setName('All');
+		$dtoAll->setReference($this->_brefAll);
+		$bouquets = array(
+			$dtoAll
+		);
 
 		if (!empty($response)) {
 			foreach ($response->e2service as $bouquet) {
@@ -36,33 +41,6 @@ class Dreambox extends AbstractController {
 		return $this->_response->write($bouquets);
 	}
 
-	public function getEventDetails() {
-		$serviceId = $this->_request->getParam('serviceId');
-		$eventId = (int) $this->_request->getParam('eventId');
-
-		$broadcasts = $this->controller(
-			'\\DreamboxRecorder\\Controller\\Dreambox',
-			'getBroadcasts',
-			array(
-				'service' => $serviceId
-			)
-		);
-
-		foreach ($broadcasts['data'] as $event) {
-			
-			if ($eventId === $event->getId()) {
-				return $this->_response->write($event);
-			}
-		}
-
-		return $this->_response->write(null);
-	}
-
-	/**
-	 * Optimize this, instead of getting all and loop till you got the right one
-	 * see in the docu if there is a api to fetch channels by bouquet.
-	 * And implement all channels as well
-	 */
 	public function getChannels() {
 		$bouquetReference = $this->_request->getParam('bouquet', 'all');
 		

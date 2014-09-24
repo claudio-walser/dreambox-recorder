@@ -45,19 +45,17 @@ $twitterBootstrap = '/resources/bootstrap-3.2.0/';
 	?>
 	<div class="top-spacer"></div>
 	<div id="range-calendar"></div>
-    <div class="container theme-showcase" role="main">
+    <div class="container" role="main">
 		
-		<div class="col-sm-4">
-			<?php		
-			include_once('content/bouquets.php');
-			?>
-		</div>
+    <?php
+    switch ($request->getParam('header')) {
+      case 'record':
+        require_once('content/record/record.php');
+        break;
+    }
+    ?>
 
-		<div class="col-sm-8">
-			<?php		
-			include_once('content/channels.php');
-			?>
-		</div>
+
     </div>
 
 

@@ -16,6 +16,9 @@ class Recording extends AbstractController {
 		$serviceReferences = $this->_request->getParam('serviceReferences');
 		$endTimes = $this->_request->getParam('endTimes');
 		$startTimes = $this->_request->getParam('startTimes');
+		$titles = $this->_request->getParam('title');
+		$channels = $this->_request->getParam('channel');
+
 		
 		if (!empty($ids)) {
 			foreach ($ids as $key => $id) {
@@ -27,11 +30,17 @@ class Recording extends AbstractController {
 					throw new \Exception('Param ids doesent match param serviceReferences in length');
 				}
 
-				if (!isset($startTimes[$key])) {
-					throw new \Exception('Param ids doesent match param serviceReferences in length');
+				if (!isset($titles[$key])) {
+					throw new \Exception('Param ids doesent match param titles in length');
+				}
+
+				if (!isset($channels[$key])) {
+					throw new \Exception('Param ids doesent match param channels in length');
 				}
 
 				$serviceReference = $serviceReferences[$key];
+				$title = $titles[$key];
+				$channel = $channels[$key];
 				$timeEnd = $endTimes[$key];
 				$timeStart = $startTimes[$key];
 				$currentTime = time();
@@ -43,33 +52,18 @@ class Recording extends AbstractController {
 				// check if intersect with other recording
 				// todo, some channels are possible to record in parallel, not sure if i can get it over
 				// http://10.20.0.99/web/serviceplayable?sRef=&sRefPlaying=
-				$query = "SELECT id, token FROM recording WHERE 
+				$query = "SELECT id, token, title, channel, timeStart, timeEnd FROM recording WHERE 
 					(timeStart <= " . $timeStart . " AND timeEnd > " . $timeStart . ")" . 
 					"OR (timeStart <= " . $timeEnd . " AND timeEnd > " . $timeEnd . ")";
 
 				$result = $this->_db->query($query);
 				if ($result->num_rows > 0) {
-					
 					$row = $result->fetch_assoc();
-					
-					$eventDetail = $this->controller(
-						'\\DreamboxRecorder\\Controller\\Dreambox',
-						'getEventDetails',
-						array(
-							'serviceId' => $row['token'],
-							'eventId' => $row['id']
-						)
-					);
-					$message = 'Intersecting, probably with the video recording right now.';
-					
-					if (isset($eventDetail['data']) && is_object($eventDetail['data'])) {
-						$event = $eventDetail['data'];
-						$message = 'Intersecting with ' . "\n" .
-								   'Kanal: ' . $event->getChannel() . "\n" .
-								   'Titel: ' . $event->getTitle() . "\n" .
-								   'Start Zeit: ' . date('H:i:s', $event->getTimeStart()) . "\n" .
-								   'End Zeit: ' . date('H:i:s', $event->getTimeEnd());
-					}
+					$message = 'Intersecting with ' . "\n" .
+							   'Kanal: ' . $row['channel'] . "\n" .
+							   'Titel: ' . $row['title'] . "\n" .
+							   'Start Zeit: ' . date('H:i:s', $row['timeStart']) . "\n" .
+							   'End Zeit: ' . date('H:i:s', $row['timeEnd']);
 
 					return $this->_response->write($message, 1, false);
 				}
@@ -81,8 +75,12 @@ class Recording extends AbstractController {
 					timeStart = " . $this->_db->real_escape_string($timeStart) . ",
 					timeEnd = " . $this->_db->real_escape_string($timeEnd) . ",
 					state = 'waiting',
-					file = ''
+					file = '',
+					title = '" . $this->_db->real_escape_string($title) . "',
+					channel = '" . $this->_db->real_escape_string($channel) . "'
 					";
+					echo $query;
+					die();
 				$this->_db->query($query);
 			}
 		}

@@ -8,5 +8,10 @@ CREATE TABLE `dreambox-recorder`.`recording` (
 	timeEnd INT(11),
 	file VARCHAR(255),
 	title VARCHAR(255),
-	subtitle VARCHAR(255)
+	subtitle VARCHAR(255),
+	serviceName VARCHAR(255)
 );
+
+
+#ALTER TABLE `dreambox-recorder`.`recording`
+#ADD serviceName VARCHAR(255);

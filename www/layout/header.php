@@ -15,11 +15,17 @@
         
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class ="<?php echo $request->getParam('header') == 'record' ? 'active' : ''; ?>">
-            	<a href="<?php echo getCurrentLink(array('header' => 'record')); ?>">Aufnehmen</a>
+            <li class ="<?php echo $request->getParam('header', 'record') == 'record' ? 'active' : ''; ?>">
+            	<a href="/?header=record">Aufnehmen</a>
             </li>
-             <li class ="<?php echo $request->getParam('header') == 'video' ? 'active' : ''; ?>">
-            	<a href="<?php echo getCurrentLink(array('header' => 'video')); ?>">Videothek</a>
+            <li class ="<?php echo $request->getParam('header') == 'planned' ? 'active' : ''; ?>">
+              <a href="/?header=planned">Geplant</a>
+            </li>
+            <li class ="<?php echo $request->getParam('header') == 'video' ? 'active' : ''; ?>">
+              <a href="/?header=video">Videothek</a>
+            </li>
+            <li class ="<?php echo $request->getParam('header') == 'current' ? 'active' : ''; ?>">
+              <a href="/?header=current">Aktuelle Aufnehme</a>
             </li>
           </ul>
         </div>

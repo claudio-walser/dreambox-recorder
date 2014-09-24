@@ -79,8 +79,6 @@ class Recording extends AbstractController {
 					title = '" . $this->_db->real_escape_string($title) . "',
 					channel = '" . $this->_db->real_escape_string($channel) . "'
 					";
-					echo $query;
-					die();
 				$this->_db->query($query);
 			}
 		}
@@ -98,6 +96,27 @@ class Recording extends AbstractController {
 		}
 		
 		return $this->_response->write($ids);
+	}
+
+	public function get() {
+		$state = $this->_request->getParam('state', 'waiting');
+		$query = "SELECT * FROM recording WHERE state = '" . $this->_db->real_escape_string($state) . "' ORDER by timeStart";
+		$result = $this->_db->query($query);
+		$entries = array();
+		while($row = $result->fetch_assoc()) {
+			$dto = new \DreamboxRecorder\Dto\Broadcast();
+			$dto->setId($row['id']);
+			$dto->setIsRecording(true);
+			$dto->setTitle($row['title']);
+			$dto->setChannel($row['channel']);
+			$dto->setTimeStart($row['timeStart']);
+			$dto->setTimeEnd($row['timeEnd']);
+			$dto->setIsOver($dto->getTimeEnd() <= time());
+
+			array_push($entries, $dto);
+		}
+
+		return $this->_response->write($entries);
 	}
 
 }

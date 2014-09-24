@@ -24,7 +24,7 @@ class Dreambox extends AbstractController {
 		
 		$dtoAll = new \DreamboxRecorder\Dto\Bouquet();
 		$dtoAll->setName('All');
-		$dtoAll->setReference($this->_brefAll);
+		$dtoAll->setReference('all');
 		$bouquets = array(
 			$dtoAll
 		);
@@ -43,8 +43,10 @@ class Dreambox extends AbstractController {
 
 	public function getChannels() {
 		$bouquetReference = $this->_request->getParam('bouquet', 'all');
-		
-		#$url = $this->_address . '/web/getallservices';
+		if ($bouquetReference === 'all') {
+			$bouquetReference = $this->_brefAll;
+		}
+
 		$url = $this->_address . '/web/getservices?sRef=' . urlencode($bouquetReference);
 		$response = $this->_xmlToObject($this->_apiClient->processUrl($url));
 

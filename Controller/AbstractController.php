@@ -14,6 +14,7 @@ abstract class AbstractController extends \Spaf\Core\Controller\Abstraction {
 	}
 
 	protected function _xmlToObject($xmlString) {
+		//echo($xmlString);
 		$xml = simplexml_load_string($xmlString);
 		return json_decode(json_encode($xml));
 	}

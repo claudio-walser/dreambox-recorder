@@ -49,7 +49,19 @@ $twitterBootstrap = '/resources/bootstrap-3.2.0/';
 		
     <?php
     switch ($request->getParam('header')) {
-      case 'record':
+      case 'planned':
+        require_once('content/planned/planned.php');
+        break;
+
+      case 'video':
+        require_once('content/video/video.php');
+        break;
+
+      case 'current':
+        require_once('content/current/current.php');
+        break;
+
+      default:
         require_once('content/record/record.php');
         break;
     }

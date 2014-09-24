@@ -4,6 +4,7 @@ namespace DreamboxRecorder\Dto;
 class Broadcast extends AbstractDto {
 	
 	protected $_id = 0;
+	protected $_channel = '';
 	protected $_title = '';
 	protected $_timeStart = '';
 	protected $_timeEnd = '';
@@ -24,6 +25,14 @@ class Broadcast extends AbstractDto {
 
 	public function getTitle() {
 		return $this->_title;
+	}
+
+	public function setChannel($channel) {
+		$this->_channel = (string) $channel;
+	}
+
+	public function getChannel() {
+		return $this->_channel;
 	}
 
 	public function setTimeStart($time) {

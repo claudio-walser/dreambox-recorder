@@ -36,6 +36,28 @@ class Dreambox extends AbstractController {
 		return $this->_response->write($bouquets);
 	}
 
+	public function getEventDetails() {
+		$serviceId = $this->_request->getParam('serviceId');
+		$eventId = (int) $this->_request->getParam('eventId');
+
+		$broadcasts = $this->controller(
+			'\\DreamboxRecorder\\Controller\\Dreambox',
+			'getBroadcasts',
+			array(
+				'service' => $serviceId
+			)
+		);
+
+		foreach ($broadcasts['data'] as $event) {
+			
+			if ($eventId === $event->getId()) {
+				return $this->_response->write($event);
+			}
+		}
+
+		return $this->_response->write(null);
+	}
+
 	/**
 	 * Optimize this, instead of getting all and loop till you got the right one
 	 * see in the docu if there is a api to fetch channels by bouquet.
@@ -88,6 +110,7 @@ class Dreambox extends AbstractController {
 				$dto->setId($broadcast->e2eventid);
 				$dto->setIsRecording($isRecording['data']);
 				$dto->setTitle($broadcast->e2eventtitle);
+				$dto->setChannel($broadcast->e2eventservicename);
 				$dto->setTimeStart($broadcast->e2eventstart);
 				$dto->setTimeEnd($broadcast->e2eventstart + $broadcast->e2eventduration);
 				$dto->setIsOver($dto->getTimeEnd() <= time());

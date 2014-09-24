@@ -29,9 +29,9 @@
 					startTimes: [$(e.currentTarget).data('start-time')]
 				},
 				success: function(response) {
-					if (response.success === false && response.data === 'error: intersect') {
+					if (response.success === false) {
 						e.currentTarget.checked = false;
-						alert('This recording intersects with another one.');
+						alert(response.data);
 					}
 					console.log(response);
 				}

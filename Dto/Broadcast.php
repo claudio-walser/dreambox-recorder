@@ -10,6 +10,7 @@ class Broadcast extends AbstractDto {
 	protected $_timeEnd = '';
 	protected $_isRecording = 0;
 	protected $_isOver = false;
+	protected $_outfile = '';
 
 	public function setId($id) {
 		$this->_id = (int) $id;
@@ -66,6 +67,14 @@ class Broadcast extends AbstractDto {
 
 	public function getIsOver() {
 		return $this->_isOver;
+	}
+
+	public function setOutfile($outfile) {
+		$this->_outfile = $outfile;
+	}
+
+	public function getOutfile() {
+		return $this->_outfile;
 	}
 }
 

@@ -104,6 +104,12 @@ class Recording extends AbstractController {
 		$result = $this->_db->query($query);
 		$entries = array();
 		while($row = $result->fetch_assoc()) {
+			$file = $row['file'];
+			$fileName = $file;
+			if (strpos($file, ':')) {
+				$parts = explode(':', $file);
+				$fileName = $parts[1];
+			}
 			$dto = new \DreamboxRecorder\Dto\Broadcast();
 			$dto->setId($row['id']);
 			$dto->setIsRecording(true);
@@ -111,6 +117,7 @@ class Recording extends AbstractController {
 			$dto->setChannel($row['channel']);
 			$dto->setTimeStart($row['timeStart']);
 			$dto->setTimeEnd($row['timeEnd']);
+			$dto->setOutfile($fileName);
 			$dto->setIsOver($dto->getTimeEnd() <= time());
 
 			array_push($entries, $dto);

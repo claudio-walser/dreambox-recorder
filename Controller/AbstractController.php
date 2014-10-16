@@ -3,7 +3,7 @@ namespace DreamboxRecorder\Controller;
 /**
  * rename that abstraction stuff, dont like it anymore
  */
-abstract class AbstractController extends \Spaf\Core\Controller\Abstraction {
+abstract class AbstractController extends \Spaf\Core\Controller\AbstractController {
 
 	protected $_db = null;
 	protected $_config = null;

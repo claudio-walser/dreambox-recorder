@@ -25,7 +25,7 @@
               <a href="/?header=video">Videothek</a>
             </li>
             <li class ="<?php echo $request->getParam('header') == 'current' ? 'active' : ''; ?>">
-              <a href="/?header=current">Aktuelle Aufnehme</a>
+              <a href="/?header=current">Aktuelle Aufnahme</a>
             </li>
           </ul>
         </div>

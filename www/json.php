@@ -2,7 +2,7 @@
 
 include('./bootstrap.php');
 
-$application = new \DreamboxRecorder\Application('json');
+$application = new \Spaf\Core\Application('json');
 echo $application->run();
 
 ?>

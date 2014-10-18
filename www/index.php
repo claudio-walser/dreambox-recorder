@@ -1,7 +1,9 @@
 <?php
 include('./bootstrap.php');
 
-$application = new \DreamboxRecorder\Application('php');
+// backend application
+$application = new \Spaf\Core\Application('php');
+// request object to fetch post/get params in the view layer
 $request = new \Spaf\Core\Request\Http();
 
 $twitterBootstrap = '/resources/bootstrap-3.2.0/';

@@ -29,7 +29,7 @@ $autoloader = new DreamboxRecorder\Autoloader();
  * registry objects to work with
  */
 $registry = Spaf\Core\Registry::getInstance();
-$registry->set('mysqli', new MySQLi('localhost', 'root', 'Sackratte', 'dreambox-recorder'), true);
+$registry->set('mysqli', new MySQLi('localhost', 'root', '', 'dreambox-recorder'), true);
 
 
 $configFile = '../config/config.ini';
